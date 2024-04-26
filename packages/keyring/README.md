@@ -1,17 +1,11 @@
-# @polkadot/keyring
 
-Key management of user accounts including generation and retrieval of keyring pairs from a variety of input combinations.
-
-## Usage
-
-Installation -
-
-```
-yarn add @polkadot/keyring
-```
-
-Classes and Functions can be imported as follows:
-
-```js
-import Keyring from '@polkadot/keyring';
-```
+import { keygen } from "@analog-labs/timegraph-js/keygen/web";
+import { web3FromAddress } from "@polkadot/extension-dapp";
+// init signer based on polkadot/extension-dapp
+const { signer } = await web3FromAddress( < "wallet address"> );
+// pass signer and address to get keygen instance
+const _keygen = new keygen({ signer: signer.signRaw,address: <"address">});
+// generate api key i.e role is optional default will be developer                             
+const apikey = await _keygen.createApiKey();
+// generate the session key
+const sessionKey = await _keygen.createSessionkey();
